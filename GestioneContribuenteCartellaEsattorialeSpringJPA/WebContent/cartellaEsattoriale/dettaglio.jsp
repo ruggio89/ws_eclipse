@@ -7,12 +7,7 @@
 <meta charset="ISO-8859-1">
 <title>Dettaglio Cartella Esattoriale</title>
 </head>
-<body>
-<%
-		CartellaEsattoriale cartellaEsattorialeInPagina = (CartellaEsattoriale) request.getAttribute("CartellaEsattorialeSingolaAttributeName");
-	%>
-	
-	
+<body>	
 
 	<div class="container">
 	
@@ -24,23 +19,23 @@
 		<div class="container-fluid">
 			<dl class="row">
 				<dt class="col-sm-3 text-right">Id</dt>
-				<dd class="col-sm-9"><%=cartellaEsattorialeInPagina.getId()%></dd>
+				<dd class="col-sm-9">${CartellaEsattorialeSingolaAttributeName.id}</dd>
 			</dl>
 			<dl class="row">
 				<dt class="col-sm-3 text-right">Denominazione</dt>
-				<dd class="col-sm-9"><%=cartellaEsattorialeInPagina.getDenominazione()%></dd>
+				<dd class="col-sm-9">${CartellaEsattorialeSingolaAttributeName.denominazione}</dd>
 			</dl>
 			<dl class="row">
 				<dt class="col-sm-3 text-right">Descrizione</dt>
-				<dd class="col-sm-9"><%=cartellaEsattorialeInPagina.getDescrizione()%></dd>
+				<dd class="col-sm-9">${CartellaEsattorialeSingolaAttributeName.descrizione}</dd>
 			</dl>
 			<dl class="row">
 				<dt class="col-sm-3 text-right">Importo</dt>
-				<dd class="col-sm-9"><%=cartellaEsattorialeInPagina.getImporto()%></dd>
+				<dd class="col-sm-9">${CartellaEsattorialeSingolaAttributeName.importo}</dd>
 			</dl>
 			<dl class="row">
 				<dt class="col-sm-3 text-right">Contribuente</dt>
-				<dd class="col-sm-9"><%=cartellaEsattorialeInPagina.getContribuente().getCodiceFiscale()%></dd>
+				<dd class="col-sm-9">${CartellaEsattorialeSingolaAttributeName.contribuente.id}</dd>
 			</dl>
 		</div>
 		<a href="PrepareSearchCartellaEsattorialeServlet" class="btn btn-outline-danger btn-md">Torna Indietro</a>

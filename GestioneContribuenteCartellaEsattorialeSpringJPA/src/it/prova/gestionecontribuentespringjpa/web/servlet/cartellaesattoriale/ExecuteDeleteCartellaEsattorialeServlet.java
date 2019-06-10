@@ -38,15 +38,11 @@ public class ExecuteDeleteCartellaEsattorialeServlet extends HttpServlet {
 			throws ServletException, IOException {
 		Long idInput = Utility.parseFromStrinToLong(request.getParameter("idInput"));
 
-		try {
-			CartellaEsattoriale cartellaEsattorialeDaEliminare = cartellaEsattorialeService
-					.caricaSingolaCartellaEsattoriale(idInput);
-			cartellaEsattorialeService.rimuovi(cartellaEsattorialeDaEliminare);
-			request.setAttribute("listaCartelleEsattorialiAttributeName",
-					cartellaEsattorialeService.listAllCartelleEsattoriali());
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+		CartellaEsattoriale cartellaEsattorialeDaEliminare = cartellaEsattorialeService
+				.caricaSingolaCartellaEsattoriale(idInput);
+		cartellaEsattorialeService.rimuovi(cartellaEsattorialeDaEliminare);
+		request.setAttribute("listaCartelleEsattorialiAttributeName",
+				cartellaEsattorialeService.listAllCartelleEsattoriali());
 
 		RequestDispatcher rd = request.getRequestDispatcher("/cartellaEsattoriale/result.jsp");
 		rd.forward(request, response);

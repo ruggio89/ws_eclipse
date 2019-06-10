@@ -18,4 +18,6 @@ public interface CartellaEsattorialeService {
 	public void rimuovi(CartellaEsattoriale cartellaEsattorialeInstance);
 
 	public List<CartellaEsattoriale> findByExample(CartellaEsattoriale example);
+	
+//	public CartellaEsattoriale getEager(Long id);
 }

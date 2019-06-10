@@ -8,11 +8,6 @@
 <title>Elimina Contribuente</title>
 </head>
 <body>
-<%
-		Contribuente contribuenteDaEliminare = (Contribuente) request.getAttribute("contribuentedaeliminare_attribute");
-	%>
-	
-	
 
 	<div class="container">
 	
@@ -24,27 +19,27 @@
 		<div class="container-fluid">
 			<dl class="row">
 				<dt class="col-sm-3 text-right">Id</dt>
-				<dd class="col-sm-9"><%=contribuenteDaEliminare.getId()%></dd>
+				<dd class="col-sm-9">${contribuentedaeliminare_attribute.id}</dd>
 			</dl>
 			<dl class="row">
 				<dt class="col-sm-3 text-right">Nome</dt>
-				<dd class="col-sm-9"><%=contribuenteDaEliminare.getNome()%></dd>
+				<dd class="col-sm-9">${contribuentedaeliminare_attribute.nome}</dd>
 			</dl>
 			<dl class="row">
 				<dt class="col-sm-3 text-right">Cognome</dt>
-				<dd class="col-sm-9"><%=contribuenteDaEliminare.getCognome()%></dd>
+				<dd class="col-sm-9">${contribuentedaeliminare_attribute.cognome}</dd>
 			</dl>
 			<dl class="row">
 				<dt class="col-sm-3 text-right">Codice Fiscale</dt>
-				<dd class="col-sm-9"><%=contribuenteDaEliminare.getCodiceFiscale()%></dd>
+				<dd class="col-sm-9">${contribuentedaeliminare_attribute.codiceFiscale}</dd>
 			</dl>
 			<dl class="row">
 				<dt class="col-sm-3 text-right">Indirizzo</dt>
-				<dd class="col-sm-9"><%=contribuenteDaEliminare.getIndirizzo()%></dd>
+				<dd class="col-sm-9">${contribuentedaeliminare_attribute.indirizzo}</dd>
 			</dl>
 		</div>
 		
-		<a href="ExecuteDeleteContribuenteServlet?idInput=<%=contribuenteDaEliminare.getId() %>" class="btn btn-outline-danger btn-md">Conferma Eliminazione</a>
+		<a href="ExecuteDeleteContribuenteServlet?idInput=${contribuentedaeliminare_attribute.id}" class="btn btn-outline-danger btn-md">Conferma Eliminazione</a>
 		<a href="PrepareSearchContribuenteServlet" class="btn btn-outline-danger btn-md">Torna Indietro</a>
 
 	</div>

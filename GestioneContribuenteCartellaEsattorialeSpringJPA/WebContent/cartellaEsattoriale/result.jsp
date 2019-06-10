@@ -1,3 +1,4 @@
+<%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "c" %>
 <%@page import="it.prova.gestionecontribuentespringjpa.model.CartellaEsattoriale"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
@@ -25,21 +26,17 @@
 				<th>Action</th>
 			</tr>
 		</thead>
-		<% List<CartellaEsattoriale> listaCartelleEsattoriali = (List<CartellaEsattoriale>)request.getAttribute("listaCartelleEsattorialiAttributeName"); 
-			for(CartellaEsattoriale cartellaEsattorialeItem: listaCartelleEsattoriali){ %>
+		<c:forEach items="${listaCartelleEsattorialiAttributeName}" var="item">
 			<tr>
-				<td><%=cartellaEsattorialeItem.getDenominazione() %></td>
-				<td><%=cartellaEsattorialeItem.getDescrizione() %></td>
+				<td>${item.denominazione}</td>
+				<td>${item.descrizione}</td>
 				<td>
-					<a href="VisualizzaDettaglioCartellaEsattorialeServlet?idCartellaEsattoriale=<%=cartellaEsattorialeItem.getId() %>" class="btn btn-outline-danger">Dettaglio</a>
-					<a href="PrepareUpdateCartellaEsattorialeServlet?idCartellaEsattoriale=<%=cartellaEsattorialeItem.getId() %>" class="btn btn-outline-danger">Modifica</a>
-					<a href="PrepareDeleteCartellaEsattorialeServlet?idCartellaEsattoriale=<%=cartellaEsattorialeItem.getId() %>" class="btn btn-outline-danger">Elimina</a>
+					<a href="VisualizzaDettaglioCartellaEsattorialeServlet?idCartellaEsattoriale=${item.id}" class="btn btn-outline-danger">Dettaglio</a>
+					<a href="PrepareUpdateCartellaEsattorialeServlet?idCartellaEsattoriale=${item.id}" class="btn btn-outline-danger">Modifica</a>
+					<a href="PrepareDeleteCartellaEsattorialeServlet?idCartellaEsattoriale=${item.id}" class="btn btn-outline-danger">Elimina</a>
 				</td>
 			</tr>
-				
-		<%	}
-		
-		%>
+		</c:forEach>	
 	
 	</table>
 	<a href="PrepareInsertCartellaEsattorialeServlet" class="btn btn-outline-danger btn-md">Inserisci Nuovo Elemento</a>

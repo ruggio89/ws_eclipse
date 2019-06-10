@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.context.support.SpringBeanAutowiringSupport;
 
 import it.prova.gestionecontribuentespringjpa.model.CartellaEsattoriale;
+import it.prova.gestionecontribuentespringjpa.model.dto.CartellaEsattorialeDTO;
 import it.prova.gestionecontribuentespringjpa.service.cartellaesattoriale.CartellaEsattorialeService;
 import it.prova.gestionecontribuentespringjpa.service.contribuente.ContribuenteService;
 import it.prova.gestionecontribuentespringjpa.utility.Utility;

@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.context.support.SpringBeanAutowiringSupport;
 
 import it.prova.gestionecontribuentespringjpa.model.Contribuente;
+import it.prova.gestionecontribuentespringjpa.model.dto.ContribuenteDTO;
 import it.prova.gestionecontribuentespringjpa.service.contribuente.ContribuenteService;
 import it.prova.gestionecontribuentespringjpa.utility.Utility;
 
@@ -40,7 +41,6 @@ public class PrepareUpdateContribuenteServlet extends HttpServlet {
 			response.sendRedirect(request.getContextPath());
 			return;
 		}
-
 		Long idTemp = Utility.parseFromStrinToLong(request.getParameter("idContribuente"));
 		Contribuente contribuenteDaInserirePerModifica = contribuenteService.caricaSingoloContribuente(idTemp);
 		request.setAttribute("contribuentedamodificare_attribute", contribuenteDaInserirePerModifica);

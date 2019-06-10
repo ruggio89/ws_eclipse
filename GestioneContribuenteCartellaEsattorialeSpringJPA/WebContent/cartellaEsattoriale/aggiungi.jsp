@@ -1,3 +1,4 @@
+<%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "c" %>
 <%@page import="it.prova.gestionecontribuentespringjpa.model.Contribuente"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="java.util.List"%>
@@ -18,11 +19,6 @@
 </style>
 </head>
 <body>
-<%if(request.getAttribute("messaggio_errore") != null){ %>
-		<%=request.getAttribute("messaggio_errore") %>
-	<% }else{ %>
-		Inserire dati<br>
-	<%} %>
 
 	<div class="container">
 
@@ -32,7 +28,12 @@
 		<div class="page-header">
 			<h3>Inserisci Cartella Esattoriale</h3>
 		</div>
-
+		<div class="alert alert-danger alert-dismissible fade show ${messaggio_errore != null?'':'d-none'} " role="alert">
+			${messaggio_errore }
+			 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+			    <span aria-hidden="true">&times;</span>
+			  </button>
+		</div>
 		<form class="form-horizontal" action="ExecuteInsertCartellaEsattorialeServlet"
 			method="post">
 			<div class="form-group">
@@ -61,10 +62,14 @@
 				<label class="control-label col-sm-2" for="contribuenteInputId">Contribuente:</label>
 				<select name="contribuenteId">
 					<option value="-1"> ---Seleziona--- </option>
-					<%List<Contribuente> listaContribuenti = (List<Contribuente>)request.getAttribute("listaContribuentiAttributeName");
-					for(Contribuente contribuenteItem : listaContribuenti){ %>
-						<option value="<%=contribuenteItem.getId() %>"> <%=contribuenteItem.getCodiceFiscale() %></option>
-					<% }%>
+					<c:forEach items="${listaContribuentiAttributeName }" var="contribuenteItem">
+						<option value="${contribuenteItem.id }"> ${contribuenteItem.codiceFiscale }</option> --%>
+					
+					</c:forEach>
+<%-- 					<%List<Contribuente> listaContribuenti = (List<Contribuente>)request.getAttribute("listaContribuentiAttributeName"); --%>
+<%--  					for(Contribuente contribuenteItem : listaContribuenti){ %> --%>
+<%-- 						<option value="<%=contribuenteItem.getId() %>"> <%=contribuenteItem.getCodiceFiscale() %></option> --%>
+<%-- 					<% }%> --%>
 				
 				</select>
 			</div>

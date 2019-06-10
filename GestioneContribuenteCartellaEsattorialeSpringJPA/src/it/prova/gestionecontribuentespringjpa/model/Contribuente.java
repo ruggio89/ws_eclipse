@@ -11,6 +11,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
+import it.prova.gestionecontribuentespringjpa.model.dto.ContribuenteDTO;
+
 @Entity
 public class Contribuente {
 
@@ -21,7 +23,7 @@ public class Contribuente {
 	private String cognome;
 	private String codiceFiscale;
 	private String indirizzo;
-	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST, mappedBy = "contribuente", orphanRemoval = true)
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "contribuente", orphanRemoval = true)
 	private Set<CartellaEsattoriale> cartelleEsattoriali = new HashSet<>();
 
 	public Contribuente() {
@@ -130,6 +132,17 @@ public class Contribuente {
 
 	public void setCartelleEsattoriali(Set<CartellaEsattoriale> cartelleEsattoriali) {
 		this.cartelleEsattoriali = cartelleEsattoriali;
+	}
+	
+	public static ContribuenteDTO buildContribuenteDTOInstance(Contribuente input) {
+		ContribuenteDTO result = new ContribuenteDTO();
+
+		result.setNome(input.getNome());
+		result.setCognome(input.getCognome());
+		result.setCodiceFiscale(input.getCodiceFiscale());
+		result.setIndirizzo(input.getIndirizzo());
+
+		return result;
 	}
 
 }

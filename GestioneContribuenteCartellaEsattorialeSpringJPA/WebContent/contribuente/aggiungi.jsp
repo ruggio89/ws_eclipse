@@ -7,13 +7,6 @@
 <title>Aggiungi Contribuente</title>
 </head>
 <body>
-<%if(request.getAttribute("messaggio_errore") != null){ %>
-		<%=request.getAttribute("messaggio_errore") %>
-	<% }else{ %>
-		Inserire dati<br>
-	<%} %>
-	
-	
 	
 	<div class="container">
 	
@@ -22,7 +15,12 @@
     <div class="page-header">
 	  <h3>Aggiungi Contribuente</h3>
 	</div>
-
+		<div class="alert alert-danger alert-dismissible fade show ${messaggio_errore != null?'':'d-none'} " role="alert">
+			${messaggio_errore }
+			 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+			    <span aria-hidden="true">&times;</span>
+			  </button>
+		</div>
       	<form class="form-horizontal" action="ExecuteInsertContribuenteServlet" method="post">
       		<div class="form-group">
       			<label class="control-label col-sm-2" for="nomeInputId">Nome:</label>

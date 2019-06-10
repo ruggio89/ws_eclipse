@@ -8,10 +8,7 @@
 <title>Dettaglio Contribuente</title>
 </head>
 <body>
-<%
-		Contribuente contribuenteInPagina = (Contribuente) request.getAttribute("ContribuenteSingoloAttributeName");
-	%>
-	
+
 	
 
 	<div class="container">
@@ -24,23 +21,23 @@
 		<div class="container-fluid">
 			<dl class="row">
 				<dt class="col-sm-3 text-right">Id</dt>
-				<dd class="col-sm-9"><%=contribuenteInPagina.getId()%></dd>
+				<dd class="col-sm-9">${ContribuenteSingoloAttributeName.id}</dd>
 			</dl>
 			<dl class="row">
 				<dt class="col-sm-3 text-right">Nome</dt>
-				<dd class="col-sm-9"><%=contribuenteInPagina.getNome()%></dd>
+				<dd class="col-sm-9">${ContribuenteSingoloAttributeName.nome}</dd>
 			</dl>
 			<dl class="row">
 				<dt class="col-sm-3 text-right">Cognome</dt>
-				<dd class="col-sm-9"><%=contribuenteInPagina.getCognome()%></dd>
+				<dd class="col-sm-9">${ContribuenteSingoloAttributeName.cognome}</dd>
 			</dl>
 			<dl class="row">
 				<dt class="col-sm-3 text-right">Codice Fiscale</dt>
-				<dd class="col-sm-9"><%=contribuenteInPagina.getCodiceFiscale()%></dd>
+				<dd class="col-sm-9">${ContribuenteSingoloAttributeName.codiceFiscale}</dd>
 			</dl>
 			<dl class="row">
 				<dt class="col-sm-3 text-right">Indirizzo</dt>
-				<dd class="col-sm-9"><%=contribuenteInPagina.getIndirizzo()%></dd>
+				<dd class="col-sm-9">${ContribuenteSingoloAttributeName.indirizzo}</dd>
 			</dl>
 		</div>
 		<a href="PrepareSearchContribuenteServlet" class="btn btn-outline-danger btn-md">Torna Indietro</a>

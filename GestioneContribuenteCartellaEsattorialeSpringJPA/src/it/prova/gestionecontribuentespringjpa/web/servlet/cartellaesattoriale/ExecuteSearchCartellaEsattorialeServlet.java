@@ -14,8 +14,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.context.support.SpringBeanAutowiringSupport;
 
 import it.prova.gestionecontribuentespringjpa.model.CartellaEsattoriale;
+import it.prova.gestionecontribuentespringjpa.model.dto.CartellaEsattorialeDTO;
 import it.prova.gestionecontribuentespringjpa.service.cartellaesattoriale.CartellaEsattorialeService;
-import it.prova.gestionecontribuentespringjpa.utility.Utility;
 
 @WebServlet("/ExecuteSearchCartellaEsattorialeServlet")
 public class ExecuteSearchCartellaEsattorialeServlet extends HttpServlet {
@@ -35,22 +35,17 @@ public class ExecuteSearchCartellaEsattorialeServlet extends HttpServlet {
     }
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String denominazioneInput = request.getParameter("denominazioneInput");
-		String descrizioneInput = request.getParameter("descrizioneInput");
-		Integer importoInput = Utility.parseFromStrinToInt(request.getParameter("importoInput"));
-		
-		CartellaEsattoriale example = new CartellaEsattoriale(denominazioneInput, descrizioneInput);
-		
-		try {
-			example.setImporto(importoInput);
-		} catch(Exception e){
-		}
-		
-	
-		request.setAttribute("listaCartelleEsattorialiAttributeName", cartellaEsattorialeService.findByExample(example));
-	
+		CartellaEsattorialeDTO cartellaEsattorialeDTO = new CartellaEsattorialeDTO();
+		request.getParameter("denominazioneInput"); 
+		request.getParameter("descrizioneInput");
+		CartellaEsattoriale cartellaDaCercare = CartellaEsattorialeDTO.buildCartellaEsattorialeInstance(cartellaEsattorialeDTO);
+
+		request.setAttribute("listaCartelleEsattorialiAttributeName", cartellaEsattorialeService
+				.findByExample(cartellaDaCercare));
+
 		RequestDispatcher rd = request.getRequestDispatcher("/cartellaEsattoriale/result.jsp");
 		rd.forward(request, response);
+		
 	}
 
 }

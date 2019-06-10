@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.context.support.SpringBeanAutowiringSupport;
 
 import it.prova.gestionecontribuentespringjpa.model.Contribuente;
+import it.prova.gestionecontribuentespringjpa.model.dto.ContribuenteDTO;
 import it.prova.gestionecontribuentespringjpa.service.contribuente.ContribuenteService;
 import it.prova.gestionecontribuentespringjpa.utility.Utility;
 
@@ -37,36 +38,45 @@ public class ExecuteUpdateContribuenteServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		String destinazione = null;
+		ContribuenteDTO contribuenteDTO = new ContribuenteDTO();
 
 		Long idInput = Utility.parseFromStrinToLong(request.getParameter("idInput"));
-		String nomeInput = request.getParameter("nomeInput");
-		String cognomeInput = request.getParameter("cognomeInput");
-		String codiceFiscaleInput = request.getParameter("codiceFiscaleInput");
-		String indirizzoInput = request.getParameter("indirizzoInput");
+		contribuenteDTO.setNome(request.getParameter("nomeInput"));
+		contribuenteDTO.setCognome(request.getParameter("cognomeInput"));
+		contribuenteDTO.setCodiceFiscale(request.getParameter("codiceFiscaleInput"));
+		contribuenteDTO.setIndirizzo(request.getParameter("indirizzoInput"));
 
-		if (nomeInput.equals("") || cognomeInput.equals("") || codiceFiscaleInput.equals("")
-				|| indirizzoInput.equals("")) {
-			String messaggioDaInviarePagina = "Attenzione, è necessario valorizzare!";
-			request.setAttribute("messaggio_errore", messaggioDaInviarePagina);
-
-			Long idTemp = Utility.parseFromStrinToLong(request.getParameter("idInput"));
-			Contribuente contribuenteDaInserirePerModifica = contribuenteService.caricaSingoloContribuente(idTemp);
-			request.setAttribute("contribuentedamodificare_attribute", contribuenteDaInserirePerModifica);
-			destinazione = "/contribuente/modifica.jsp";
-		} else {
-			try {
-				Contribuente contribuenteDaModificare = new Contribuente(idInput, nomeInput, cognomeInput,
-						codiceFiscaleInput, indirizzoInput);
-				contribuenteService.aggiorna(contribuenteDaModificare);
-
-				request.setAttribute("listaContribuentiAttributeName", contribuenteService.listAllContribuenti());
-				destinazione = "/contribuente/result.jsp";
-			} catch (Exception e) {
-				e.printStackTrace();
+		if (!contribuenteDTO.validate().isEmpty()) {
+			for (String messaggioItem : contribuenteDTO.validate()) {
+				
+				request.setAttribute("messaggio_errore", contribuenteDTO.validate());
+				Long idTemp = Utility.parseFromStrinToLong(request.getParameter("idInput"));
+				Contribuente contribuenteDaInserirePerModifica = contribuenteService.caricaSingoloContribuente(idTemp);
+				request.setAttribute("contribuentedamodificare_attribute", contribuenteDaInserirePerModifica);
+				destinazione = "/contribuente/modifica.jsp";
+				RequestDispatcher rd = request.getRequestDispatcher(destinazione);
+				rd.forward(request, response);
+				return;
+				
 			}
-
+			
 		}
+//			String messaggioDaInviarePagina = "Attenzione, è necessario valorizzare!";
+//			request.setAttribute("messaggio_errore", messaggioDaInviarePagina);
+//
+//			Long idTemp = Utility.parseFromStrinToLong(request.getParameter("idInput"));
+//			Contribuente contribuenteDaInserirePerModifica = contribuenteService.caricaSingoloContribuente(idTemp);
+//			request.setAttribute("contribuentedamodificare_attribute", contribuenteDaInserirePerModifica);
+//			destinazione = "/contribuente/modifica.jsp";
+//		} else {
+			
+		Contribuente contribuenteDaModificare = ContribuenteDTO.buildContribuenteInstance(contribuenteDTO);
+		contribuenteDaModificare.setId(idInput);
+		contribuenteService.aggiorna(contribuenteDaModificare);
 
+		request.setAttribute("listaContribuentiAttributeName", contribuenteService.listAllContribuenti());
+		destinazione = "/contribuente/result.jsp";
+			
 		RequestDispatcher rd = request.getRequestDispatcher(destinazione);
 		rd.forward(request, response);
 	}

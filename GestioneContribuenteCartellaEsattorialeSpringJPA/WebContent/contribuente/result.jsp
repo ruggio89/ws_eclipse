@@ -1,3 +1,4 @@
+<%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "c" %>
 <%@page import="it.prova.gestionecontribuentespringjpa.model.Contribuente"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
@@ -27,23 +28,19 @@
 				<th>Action</th>
 			</tr>
 		</thead>
-		<% List<Contribuente> listaContribuenti = (List<Contribuente>)request.getAttribute("listaContribuentiAttributeName"); 
-			for(Contribuente contribuenteItem: listaContribuenti){ %>
+		<c:forEach items="${listaContribuentiAttributeName}" var="item">
 			<tr>
-				<td><%=contribuenteItem.getNome() %></td>
-				<td><%=contribuenteItem.getCognome() %></td>
-				<td><%=contribuenteItem.getCodiceFiscale() %></td>
+				<td>${item.nome}</td>
+				<td>${item.cognome}</td>
+				<td>${item.codiceFiscale}</td>
 				<td>
-					<a href="VisualizzaDettaglioContribuenteServlet?idContribuente=<%=contribuenteItem.getId() %>" class="btn btn-outline-danger">Dettaglio</a>
-					<a href="PrepareUpdateContribuenteServlet?idContribuente=<%=contribuenteItem.getId() %>" class="btn btn-outline-danger">Modifica</a>
-					<a href="PrepareDeleteContribuenteServlet?idContribuente=<%=contribuenteItem.getId() %>" class="btn btn-outline-danger">Elimina</a>
+					<a href="Visualizza	DettaglioContribuenteServlet?idContribuente=${item.id }" class="btn btn-outline-danger">Dettaglio</a>
+					<a href="PrepareUpdateContribuenteServlet?idContribuente=${item.id }" class="btn btn-outline-danger">Modifica</a>
+					<a href="PrepareDeleteContribuenteServlet?idContribuente=${item.id }" class="btn btn-outline-danger">Elimina</a>
 				</td>
 			</tr>
+		</c:forEach>
 				
-		<%	}
-		
-		%>
-	
 	</table>
 	<a href="PrepareInsertContribuenteServlet" class="btn btn-outline-danger btn-md">Inserisci Nuovo Elemento</a>
 

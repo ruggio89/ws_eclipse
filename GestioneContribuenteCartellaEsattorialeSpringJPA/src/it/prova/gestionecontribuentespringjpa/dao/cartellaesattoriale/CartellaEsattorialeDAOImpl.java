@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 import org.apache.commons.lang.StringUtils;
 import org.hibernate.Criteria;
@@ -79,5 +80,12 @@ public class CartellaEsattorialeDAOImpl implements CartellaEsattorialeDAO{
 		contribuenteCriteria.add(contribuenteExample);
 		return contribuenteCriteria.list();
 	}
+	
+//	public CartellaEsattoriale getEager(Long id) {
+//		Query q = entityManager.createQuery("Select a from CartellaEsattoriale a join fetch a.contribuente where a.id=:id");
+//		q.setParameter("id", id);
+//		
+//		return (CartellaEsattoriale) q.getSingleResult();
+//	}
 
 }

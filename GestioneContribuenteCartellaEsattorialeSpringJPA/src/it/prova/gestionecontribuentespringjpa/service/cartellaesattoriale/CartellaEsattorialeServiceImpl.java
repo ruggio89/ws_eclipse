@@ -45,4 +45,9 @@ public class CartellaEsattorialeServiceImpl implements CartellaEsattorialeServic
 		return cartellaEsattorialeDAO.findByExample(example);
 	}
 
+//	@Override
+//	public CartellaEsattoriale getEager(Long id) {
+//		return cartellaEsattorialeDAO.getEager(id);
+//	}
+
 }

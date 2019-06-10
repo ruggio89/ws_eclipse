@@ -15,6 +15,8 @@ import org.springframework.web.context.support.SpringBeanAutowiringSupport;
 
 import it.prova.gestionecontribuentespringjpa.model.CartellaEsattoriale;
 import it.prova.gestionecontribuentespringjpa.model.Contribuente;
+import it.prova.gestionecontribuentespringjpa.model.dto.CartellaEsattorialeDTO;
+import it.prova.gestionecontribuentespringjpa.model.dto.ContribuenteDTO;
 import it.prova.gestionecontribuentespringjpa.service.cartellaesattoriale.CartellaEsattorialeService;
 import it.prova.gestionecontribuentespringjpa.service.contribuente.ContribuenteService;
 import it.prova.gestionecontribuentespringjpa.utility.Utility;
@@ -42,33 +44,62 @@ public class ExecuteInsertCartellaEsattorialeServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		String destinazione = null;
+		int importoInputId = 0;
+		Long contribuenteInputId = 0L;
 
-		String denominazioneInput = request.getParameter("denominazioneInput");
-		String descrizioneInput = request.getParameter("descrizioneInput");
-		Integer importoInput = Utility.parseFromStrinToInt(request.getParameter("importoInput"));
-
-		Long idInputContribuente = Long.parseLong(request.getParameter("contribuenteId"));
-
-		if (denominazioneInput.equals("") || descrizioneInput.equals("") || importoInput == null || importoInput <= 0
-				|| idInputContribuente == null || idInputContribuente <= 0L) {
-			String messaggioDaInviarePagina = "Attenzione, è necessario valorizzare!";
-			request.setAttribute("listaContribuentiAttributeName", contribuenteService.listAllContribuenti());
-			request.setAttribute("messaggio_errore", messaggioDaInviarePagina);
-			destinazione = "/cartellaEsattoriale/aggiungi.jsp";
-		} else {
-
-			Contribuente contribuenteInput = new Contribuente(idInputContribuente);
-			CartellaEsattoriale cartellaEsattorialeDaInserire = new CartellaEsattoriale(denominazioneInput,
-					descrizioneInput, importoInput, contribuenteInput);
-			cartellaEsattorialeService.inserisciNuova(cartellaEsattorialeDaInserire);
-			request.setAttribute("listaCartelleEsattorialiAttributeName", cartellaEsattorialeService.listAllCartelleEsattoriali());
-
-			destinazione = "/cartellaEsattoriale/result.jsp";
-
+		try {
+			importoInputId = Integer.parseInt((String) request.getParameter("importoInput"));
+			contribuenteInputId = Long.parseLong((String) request.getParameter("contribuenteId"));
+		} catch (NumberFormatException e) {
+			importoInputId = -1;
+			contribuenteInputId = -1L;
 		}
+		
+		CartellaEsattorialeDTO cartellaEsattorialeDTO = new CartellaEsattorialeDTO();
+
+		cartellaEsattorialeDTO.setDenominazione(request.getParameter("denominazioneInput"));
+		cartellaEsattorialeDTO.setDescrizione(request.getParameter("descrizioneInput"));
+		cartellaEsattorialeDTO.setImporto(importoInputId);
+		cartellaEsattorialeDTO.setContribuenteId(contribuenteInputId);
+		
+
+		if (!cartellaEsattorialeDTO.validate().isEmpty()) {
+			for (String messaggioItem : cartellaEsattorialeDTO.validate()) {
+				
+				request.setAttribute("listaContribuentiAttributeName", contribuenteService.listAllContribuenti());
+				request.setAttribute("messaggio_errore", cartellaEsattorialeDTO.validate());
+				destinazione = "/cartellaEsattoriale/aggiungi.jsp";
+				RequestDispatcher rd = request.getRequestDispatcher(destinazione);
+				rd.forward(request, response);
+			}
+//			String messaggioDaInviarePagina = "Attenzione, è necessario valorizzare!";
+//			request.setAttribute("listaContribuentiAttributeName", contribuenteService.listAllContribuenti());
+//			request.setAttribute("messaggio_errore", messaggioDaInviarePagina);
+//			destinazione = "/cartellaEsattoriale/aggiungi.jsp";
+//		} else {
+//
+//			Contribuente contribuenteInput = new Contribuente(idInputContribuente);
+//			CartellaEsattoriale cartellaEsattorialeDaInserire = CartellaEsattorialeDTO.buildCartellaEsattorialeInstance(cartellaEsattorialeDTO);
+//			cartellaEsattorialeDaInserire.setContribuente(contribuenteInput);
+//			
+//			cartellaEsattorialeService.inserisciNuova(cartellaEsattorialeDaInserire);
+//			request.setAttribute("listaCartelleEsattorialiAttributeName", cartellaEsattorialeService.listAllCartelleEsattoriali());
+//
+//			destinazione = "/cartellaEsattoriale/result.jsp";
+//
+//		}
+		
+		CartellaEsattoriale cartellaEsattorialeDaInserire = CartellaEsattorialeDTO.buildCartellaEsattorialeInstance(cartellaEsattorialeDTO);
+		cartellaEsattorialeDaInserire.setContribuente(contribuenteService.caricaSingoloContribuente(contribuenteInputId));
+		
+		cartellaEsattorialeService.inserisciNuova(cartellaEsattorialeDaInserire);
+		request.setAttribute("listaCartelleEsattorialiAttributeName", cartellaEsattorialeService.listAllCartelleEsattoriali());
+
+		destinazione = "/cartellaEsattoriale/result.jsp";
 
 		RequestDispatcher rd = request.getRequestDispatcher(destinazione);
 		rd.forward(request, response);
+		}
 	}
 
 }

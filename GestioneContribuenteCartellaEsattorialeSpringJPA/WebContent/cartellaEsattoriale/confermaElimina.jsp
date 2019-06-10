@@ -8,11 +8,6 @@
 <title>Elimina Cartella Esattoriale</title>
 </head>
 <body>
-<%
-		CartellaEsattoriale cartellaEsattorialeDaEliminare = (CartellaEsattoriale) request.getAttribute("cartellaesattorialedaeliminare_attribute");
-	%>
-	
-	
 
 	<div class="container">
 	
@@ -24,27 +19,27 @@
 		<div class="container-fluid">
 			<dl class="row">
 				<dt class="col-sm-3 text-right">Id</dt>
-				<dd class="col-sm-9"><%=cartellaEsattorialeDaEliminare.getId()%></dd>
+				<dd class="col-sm-9">${cartellaesattorialedaeliminare_attribute.id}</dd>
 			</dl>
 			<dl class="row">
 				<dt class="col-sm-3 text-right">Denominazione</dt>
-				<dd class="col-sm-9"><%=cartellaEsattorialeDaEliminare.getDenominazione()%></dd>
+				<dd class="col-sm-9">${cartellaesattorialedaeliminare_attribute.denominazione}</dd>
 			</dl>
 			<dl class="row">
 				<dt class="col-sm-3 text-right">Descrizione</dt>
-				<dd class="col-sm-9"><%=cartellaEsattorialeDaEliminare.getDescrizione()%></dd>
+				<dd class="col-sm-9">${cartellaesattorialedaeliminare_attribute.descrizione}</dd>
 			</dl>
 			<dl class="row">
 				<dt class="col-sm-3 text-right">Importo</dt>
-				<dd class="col-sm-9"><%=cartellaEsattorialeDaEliminare.getImporto()%></dd>
+				<dd class="col-sm-9">${cartellaesattorialedaeliminare_attribute.importo}</dd>
 			</dl>
 			<dl class="row">
 				<dt class="col-sm-3 text-right">Contribuente</dt>
-				<dd class="col-sm-9"><%=cartellaEsattorialeDaEliminare.getContribuente().getCodiceFiscale()%></dd>
+				<dd class="col-sm-9">${cartellaesattorialedaeliminare_attribute.contribuente.id}</dd>
 			</dl>
 		</div>
 		
-		<a href="ExecuteDeleteCartellaEsattorialeServlet?idInput=<%=cartellaEsattorialeDaEliminare.getId() %>" class="btn btn-outline-danger btn-md">Conferma Eliminazione</a>
+		<a href="ExecuteDeleteCartellaEsattorialeServlet?idInput=${cartellaesattorialedaeliminare_attribute.id}" class="btn btn-outline-danger btn-md">Conferma Eliminazione</a>
 		<a href="PrepareSearchCartellaEsattorialeServlet" class="btn btn-outline-danger btn-md">Torna Indietro</a>
 
 	</div>
