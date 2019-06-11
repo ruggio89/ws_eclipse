@@ -5,5 +5,5 @@ import it.prova.gestionecontribuentespringjpa.model.CartellaEsattoriale;
 
 public interface CartellaEsattorialeDAO extends IBaseDAO<CartellaEsattoriale>{
 	
-//	public CartellaEsattoriale getEager(Long id);
+	public CartellaEsattoriale getEager(Long id);
 }

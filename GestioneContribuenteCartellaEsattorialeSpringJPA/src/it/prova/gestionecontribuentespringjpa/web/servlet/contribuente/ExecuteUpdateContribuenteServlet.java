@@ -48,7 +48,7 @@ public class ExecuteUpdateContribuenteServlet extends HttpServlet {
 
 		if (!contribuenteDTO.validate().isEmpty()) {
 			for (String messaggioItem : contribuenteDTO.validate()) {
-				
+
 				request.setAttribute("messaggio_errore", contribuenteDTO.validate());
 				Long idTemp = Utility.parseFromStrinToLong(request.getParameter("idInput"));
 				Contribuente contribuenteDaInserirePerModifica = contribuenteService.caricaSingoloContribuente(idTemp);
@@ -57,26 +57,18 @@ public class ExecuteUpdateContribuenteServlet extends HttpServlet {
 				RequestDispatcher rd = request.getRequestDispatcher(destinazione);
 				rd.forward(request, response);
 				return;
-				
+
 			}
-			
+
 		}
-//			String messaggioDaInviarePagina = "Attenzione, è necessario valorizzare!";
-//			request.setAttribute("messaggio_errore", messaggioDaInviarePagina);
-//
-//			Long idTemp = Utility.parseFromStrinToLong(request.getParameter("idInput"));
-//			Contribuente contribuenteDaInserirePerModifica = contribuenteService.caricaSingoloContribuente(idTemp);
-//			request.setAttribute("contribuentedamodificare_attribute", contribuenteDaInserirePerModifica);
-//			destinazione = "/contribuente/modifica.jsp";
-//		} else {
-			
+
 		Contribuente contribuenteDaModificare = ContribuenteDTO.buildContribuenteInstance(contribuenteDTO);
 		contribuenteDaModificare.setId(idInput);
 		contribuenteService.aggiorna(contribuenteDaModificare);
 
 		request.setAttribute("listaContribuentiAttributeName", contribuenteService.listAllContribuenti());
 		destinazione = "/contribuente/result.jsp";
-			
+
 		RequestDispatcher rd = request.getRequestDispatcher(destinazione);
 		rd.forward(request, response);
 	}

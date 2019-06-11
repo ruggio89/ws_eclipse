@@ -64,7 +64,6 @@
 					<option value="-1"> ---Seleziona--- </option>
 					<c:forEach items="${listaContribuentiAttributeName }" var="contribuenteItem">
 						<option value="${contribuenteItem.id }"> ${contribuenteItem.codiceFiscale }</option> --%>
-					
 					</c:forEach>
 <%-- 					<%List<Contribuente> listaContribuenti = (List<Contribuente>)request.getAttribute("listaContribuentiAttributeName"); --%>
 <%--  					for(Contribuente contribuenteItem : listaContribuenti){ %> --%>

@@ -51,4 +51,14 @@ public class UtenteServiceImpl implements UtenteService {
 		return utenteDAO.executeLogin(username, password);
 	}
 
+	@Transactional(readOnly = true)
+	public Utente getEager(Long id) {
+		return utenteDAO.getEager(id);
+	}
+
+	@Transactional(readOnly = true)
+	public Utente eseguiAccessoEager(String username, String password) {
+		return utenteDAO.executeLoginEager(username, password);
+	}
+
 }

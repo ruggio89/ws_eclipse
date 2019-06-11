@@ -3,7 +3,6 @@ package it.prova.gestionecontribuentespringjpa.model;
 import java.util.HashSet;
 import java.util.Set;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -133,7 +132,7 @@ public class Contribuente {
 	public void setCartelleEsattoriali(Set<CartellaEsattoriale> cartelleEsattoriali) {
 		this.cartelleEsattoriali = cartelleEsattoriali;
 	}
-	
+
 	public static ContribuenteDTO buildContribuenteDTOInstance(Contribuente input) {
 		ContribuenteDTO result = new ContribuenteDTO();
 

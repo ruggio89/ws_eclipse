@@ -56,12 +56,6 @@ public class ExecuteInsertContribuenteServlet extends HttpServlet {
 
 		}
 
-//		if (nomeInput.equals("") || cognomeInput.equals("") || codiceFiscaleInput.equals("")
-//				|| indirizzoInput.equals("")) {
-//			String messaggioDaInviarePagina = "Attenzione, è necessario valorizzare!";
-//			request.setAttribute("messaggio_errore", messaggioDaInviarePagina);
-//			destinazione = "/contribuente/aggiungi.jsp";
-//		} else {
 		Contribuente contribuenteDaInserire = ContribuenteDTO.buildContribuenteInstance(contribuenteDTO);
 		contribuenteService.inserisciNuovo(contribuenteDaInserire);
 
@@ -70,8 +64,6 @@ public class ExecuteInsertContribuenteServlet extends HttpServlet {
 
 		RequestDispatcher rd = request.getRequestDispatcher(destinazione);
 		rd.forward(request, response);
-
-//		}
 
 	}
 

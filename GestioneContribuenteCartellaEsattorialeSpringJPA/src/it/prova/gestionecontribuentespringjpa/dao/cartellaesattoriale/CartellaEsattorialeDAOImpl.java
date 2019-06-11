@@ -18,7 +18,7 @@ import org.springframework.stereotype.Component;
 import it.prova.gestionecontribuentespringjpa.model.CartellaEsattoriale;
 
 @Component
-public class CartellaEsattorialeDAOImpl implements CartellaEsattorialeDAO{
+public class CartellaEsattorialeDAOImpl implements CartellaEsattorialeDAO {
 
 	@PersistenceContext
 	private EntityManager entityManager;
@@ -37,17 +37,17 @@ public class CartellaEsattorialeDAOImpl implements CartellaEsattorialeDAO{
 
 	@Override
 	public void update(CartellaEsattoriale cartellaEsattorialeInstance) {
-		cartellaEsattorialeInstance = entityManager.merge(cartellaEsattorialeInstance);		
+		cartellaEsattorialeInstance = entityManager.merge(cartellaEsattorialeInstance);
 	}
 
 	@Override
 	public void insert(CartellaEsattoriale cartellaEsattorialeInstance) {
-		entityManager.persist(cartellaEsattorialeInstance);		
+		entityManager.persist(cartellaEsattorialeInstance);
 	}
 
 	@Override
 	public void delete(CartellaEsattoriale cartellaEsattorialeInstance) {
-		entityManager.remove(entityManager.merge(cartellaEsattorialeInstance));		
+		entityManager.remove(entityManager.merge(cartellaEsattorialeInstance));
 	}
 
 	@SuppressWarnings("unchecked")
@@ -72,20 +72,22 @@ public class CartellaEsattorialeDAOImpl implements CartellaEsattorialeDAO{
 		};
 
 		Criteria contribuenteCriteria = session.createCriteria(CartellaEsattoriale.class);
-		Example contribuenteExample = Example.create(cartellaEsattorialeInstance).setPropertySelector(ps).enableLike(MatchMode.START);
+		Example contribuenteExample = Example.create(cartellaEsattorialeInstance).setPropertySelector(ps)
+				.enableLike(MatchMode.START);
 		if (cartellaEsattorialeInstance.getContribuente() != null) {
-			contribuenteCriteria.createCriteria("municipio").add(Example.create(cartellaEsattorialeInstance.getContribuente()));
+			contribuenteCriteria.createCriteria("municipio")
+					.add(Example.create(cartellaEsattorialeInstance.getContribuente()));
 		}
 
 		contribuenteCriteria.add(contribuenteExample);
 		return contribuenteCriteria.list();
 	}
-	
-//	public CartellaEsattoriale getEager(Long id) {
-//		Query q = entityManager.createQuery("Select a from CartellaEsattoriale a join fetch a.contribuente where a.id=:id");
-//		q.setParameter("id", id);
-//		
-//		return (CartellaEsattoriale) q.getSingleResult();
-//	}
+
+	public CartellaEsattoriale getEager(Long id) {
+		Query q = entityManager.createQuery("Select a from CartellaEsattoriale a join fetch a.contribuente where a.id=:id");
+		q.setParameter("id", id);
+		
+		return (CartellaEsattoriale) q.getSingleResult();
+	}
 
 }
