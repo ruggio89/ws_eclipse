@@ -135,9 +135,6 @@ public class UtenteDTO {
 		if (dataRegistrazione.equals("") || dataRegistrazione == null) {
 			listaErrori.add("Inserire correttamente campo indirizzo");
 		}
-		if (ruoli.isEmpty() || ruoli == null) {
-			listaErrori.add("Inserire almeno un ruolo");
-		}
 		return listaErrori;
 	}
 	

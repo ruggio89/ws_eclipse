@@ -36,10 +36,6 @@ public class VisualizzaDettaglioCartellaEsattorialeServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		if (request.getSession().getAttribute("userInfo") == null) {
-			response.sendRedirect(request.getContextPath());
-			return;
-		}
 
 		Long idCartellaEsattorialeDaPagina = Utility
 				.parseFromStrinToLong(request.getParameter("idCartellaEsattoriale"));

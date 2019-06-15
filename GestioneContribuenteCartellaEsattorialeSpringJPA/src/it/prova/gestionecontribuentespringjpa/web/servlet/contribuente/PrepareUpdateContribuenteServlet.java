@@ -37,10 +37,7 @@ public class PrepareUpdateContribuenteServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		if (request.getSession().getAttribute("userInfo") == null) {
-			response.sendRedirect(request.getContextPath());
-			return;
-		}
+		
 		Long idTemp = Utility.parseFromStrinToLong(request.getParameter("idContribuente"));
 		Contribuente contribuenteDaInserirePerModifica = contribuenteService.caricaSingoloContribuente(idTemp);
 		request.setAttribute("contribuentedamodificare_attribute", contribuenteDaInserirePerModifica);

@@ -75,4 +75,5 @@ public class RuoloDAOImpl implements RuoloDAO{
 		return criteria.list();
 	}
 
+
 }

@@ -58,6 +58,8 @@
 						<option value="${item.id}">
 						${item.codiceFiscale}</option>
 					</c:forEach>
+					
+					
 <%-- 					<%List<Contribuente> listaContribuenti = (List<Contribuente>)request.getAttribute("listaContribuentiAttributeName"); --%>
 <!-- // 					for(Contribuente contribuenteItem : listaContribuenti){ -->
 <!-- // 						if(contribuenteItem.getId() != cartellaEsattorialeDaModificare.getContribuente().getId()){ -->

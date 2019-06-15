@@ -34,10 +34,7 @@ public class PrepareInsertCartellaEsattorialeServlet extends HttpServlet {
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		if(request.getSession().getAttribute("userInfo") == null) {
-			response.sendRedirect(request.getContextPath());
-			return;
-		}
+		
 		request.setAttribute("listaContribuentiAttributeName", contribuenteService.listAllContribuenti());
 		
 		RequestDispatcher rd = request.getRequestDispatcher("/cartellaEsattoriale/aggiungi.jsp");
