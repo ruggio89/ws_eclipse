@@ -39,7 +39,7 @@
 	<div class="jumbotron">
       <div class="container">
         <h1 class="display-4">Gestione Categorie</h1>
-        <p><a class="btn btn-danger btn-lg" href="${pageContext.request.contextPath}/admin/PrepareSearchUCategoriaServlet" role="button">Vai alla Gestione &raquo;</a></p>
+        <p><a class="btn btn-danger btn-lg" href="${pageContext.request.contextPath}/admin/PrepareSearchCategoriaServlet" role="button">Vai alla Gestione &raquo;</a></p>
       </div>
     </div>
     </c:if>
