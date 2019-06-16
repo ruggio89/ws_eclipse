@@ -14,8 +14,10 @@
 	<%@ include file="../header.jsp" %>
 
 		<div class="page-header">
+		<br>
 			<h3>Dettagli Annuncio da Acquistare</h3>
 		</div>
+		<br>
 		<div class="container-fluid">
 			<dl class="row">
 				<dt class="col-sm-3 text-right">Id</dt>
@@ -51,7 +53,7 @@
 <!-- 			</dl> -->
 		</div>
 		<a href="${pageContext.request.contextPath}/ExecuteBuyAnnuncioServlet?idInput=${annunciodacomprare_attribute.id}" class="btn btn-outline-danger">Conferma Acquisto</a>
-		<a href="${pageContext.request.contextPath}/PrepareSearchAnnuncioServlet" class="btn btn-outline-danger">Torna Indietro</a>
+		<a href="${pageContext.request.contextPath}/ReturnHomeServlet" class="btn btn-outline-danger">Torna Indietro</a>
 	</div>
 </body>
 </html>

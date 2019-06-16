@@ -11,11 +11,6 @@
 <title>Inserisci Nuovo Annuncio</title>
 <link rel="stylesheet" type="text/css"
 	href="<%=request.getContextPath()%>/css/jqueryUI/jquery-ui.min.css" />
-<style>
-.ui-autocomplete-loading {
-	background: white url("../img/anim_16x16.gif") right center no-repeat;
-}
-</style>
 </head>
 <body>
 
@@ -27,33 +22,36 @@
 		<div class="page-header">
 			<h3>Inserisci Annuncio</h3>
 		</div>
-		<div class="alert alert-danger alert-dismissible fade show ${messaggio_errore != null?'':'d-none'} " role="alert">
-			${messaggio_errore }
-			 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-			    <span aria-hidden="true">&times;</span>
-			  </button>
-		</div>
-		<form class="form-horizontal" action="ExecuteInsertAnnuncioUtenteServlet"
-			method="post">
+<%-- 		<div class="alert alert-danger alert-dismissible fade show ${messaggio_errore != null?'':'d-none'} " role="alert"> --%>
+<%-- 			${messaggio_errore } --%>
+<!-- 			 <button type="button" class="close" data-dismiss="alert" aria-label="Close"> -->
+<!-- 			    <span aria-hidden="true">&times;</span> -->
+<!-- 			  </button> -->
+<!-- 		</div> -->
+		<form class="form-horizontal" name="myForm" action="ExecuteInsertAnnuncioUtenteServlet"
+			method="post" onsubmit="return validateForm()">
 			<div class="form-group">
       			<label class="control-label col-sm-2" for="testoAnnuncioInputId">Testo Annuncio:</label>
 	    		<div class="col-sm-4">
 					<input class="form-control" type="text" id="testoAnnuncioInputId" name="testoAnnuncioInput" >
+					<div id="messaggioAnnuncio" style="color:Red;display:none">Allarme! Inserisci testo Annuncio!</div>
 			 	</div>
   			</div>
   			<div class="form-group">
       			<label class="control-label col-sm-2" for="prezzoInputId">Prezzo:</label>
 	    		<div class="col-sm-4">
-					<input class="form-control" type="text" id="prezzoInputId" name="prezzoInput" >
+					<input class="form-control" type="text" id="prezzoInputId" name="prezzoInput">
+					<div id="messaggioPrezzo" style="color:Red;display:none;">Allarme! Inserisci prezzo!</div>
 			 	</div>
   			</div>
-  			<div class="form-group">
-<!--   				<label class="control-label col-sm-2" for="categoriaInputId">Categoria:</label> -->
-				<c:forEach items="${listaCategorieAttributeName}" var="categoriaItem">
-					<input type="checkbox" name="categoriaId" value="${categoriaItem.id}"/>-->  ${categoriaItem.descrizione}<br>
-				</c:forEach>
-			</div>
-			
+  			<c:forEach items="${listaCategorieAttributeName}" var="categoriaItem">
+				<div class="custom-control custom-checkbox">
+					<input type="checkbox" class="custom-control-input" id="${categoriaItem.id}" name="categoriaId" value="${categoriaItem.id}"/>
+					<label class="custom-control-label" for="${categoriaItem.id}">${categoriaItem.descrizione}</label><br>
+				</div>
+			</c:forEach>
+			<div id="messaggioCategoria" style="color:Red;display:none">Allarme! Inserisci almeno una categoria!</div>
+			<br>
 			<div class="form-group">
 				<div class="col-sm-offset-2 col-sm-10">
 					<button type="submit" class="btn btn-outline-danger btn-md">Effettua
@@ -65,7 +63,31 @@
 
 	</div>
 	<!-- /.container -->
+	
+<script type="text/javascript">
+function validateForm() {
+    var textTestoAnnuncio = document.forms["myForm"]["testoAnnuncioInput"].value;
+    var textPrezzo = document.forms["myForm"]["prezzoInput"].value;
+	var allCheckBoxes = document.querySelectorAll("[name='categoriaId']:checked");
+	
+	if(textTestoAnnuncio == "" || textTestoAnnuncio == null) {
+	    document.getElementById("messaggioAnnuncio").style.display = "";
+	    document.myForm.testoAnnuncioInput.focus();
+	    return false;
+	} 
+	if(textPrezzo == "" || textPrezzo == null) {
+	    document.getElementById("messaggioPrezzo").style.display = "";
+	    document.myForm.prezzoInput.focus();
+	    return false;
+	}
+	if(allCheckBoxes.length == 0){
+		document.getElementById("messaggioCategoria").style.display="";
+		return false;
+	}
 
+    return true;
+}
+</script>
 
 
 </body>

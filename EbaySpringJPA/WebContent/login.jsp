@@ -26,6 +26,7 @@
       <label for="inputPassword" class="sr-only">Password</label>
       <input type="password" name="inputPassword" id="inputPassword" class="form-control" placeholder="Password" required>
       <button class="btn btn-lg btn-primary btn-block" type="submit">Esegui Accesso</button>
+      <br>
       <p>Non sei registrato? Clicca <a href="${pageContext.request.contextPath}/PrepareSignUpServlet">qui</a></p>
       <p class="mt-5 mb-3 text-muted">&copy; 2017-2018</p>
     </form>

@@ -14,8 +14,10 @@
 	<%@ include file="../header.jsp" %>
 
 		<div class="page-header">
+		<br>
 			<h3>Dettagli Annuncio da Eliminare</h3>
 		</div>
+		<br>
 		<div class="container-fluid">
 			<dl class="row">
 				<dt class="col-sm-3 text-right">Id</dt>

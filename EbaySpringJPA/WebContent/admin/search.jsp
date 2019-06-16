@@ -13,8 +13,10 @@
    <%@ include file="../header.jsp" %>
       
     <div class="page-header">
+    <br>
 	  <h3>Ricerca Utente</h3>
 	</div>
+	<br>
 
       	<form class="form-horizontal" action="${pageContext.request.contextPath}/admin/ExecuteSearchUtenteServlet" method="post">
       		<div class="form-group">

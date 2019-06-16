@@ -25,21 +25,24 @@
 		
 
 		<div class="page-header">
+			<br>
 			<h3>Registrati</h3>
+			<br>
 		</div>
-		<div class="alert alert-danger alert-dismissible fade show ${messaggio_errore != null?'':'d-none'} " role="alert">
-			${messaggio_errore }
-			 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-			    <span aria-hidden="true">&times;</span>
-			  </button>
-		</div>
-		<form class="form-horizontal" action="${pageContext.request.contextPath}/ExecuteSignUpServlet"
-			method="post">
+<%-- 		<div class="alert alert-danger alert-dismissible fade show ${messaggio_errore != null?'':'d-none'} " role="alert"> --%>
+<%-- 			${messaggio_errore } --%>
+<!-- 			 <button type="button" class="close" data-dismiss="alert" aria-label="Close"> -->
+<!-- 			    <span aria-hidden="true">&times;</span> -->
+<!-- 			  </button> -->
+<!-- 		</div> -->
+		<form class="form-horizontal" name="myForm" action="${pageContext.request.contextPath}/ExecuteSignUpServlet"
+			method="post" onsubmit="return validateForm()">
 			<div class="form-group">
 				<label class="control-label col-sm-2" for="nomeInputId">Nome:</label>
 				<div class="col-sm-4">
 					<input class="form-control" type="text" id="nomeInputId"
 						name="nomeInput">
+					<div id="messaggioNome" style="color:Red;display:none;">Allarme! Inserisci Nome!</div>
 				</div>
 			</div>
 			<div class="form-group">
@@ -47,6 +50,7 @@
 				<div class="col-sm-4">
 					<input class="form-control" type="text" id="cognomeInputId"
 						name="cognomeInput">
+					<div id="messaggioCognome" style="color:Red;display:none;">Allarme! Inserisci Cognome!</div>	
 				</div>
 			</div>
 			<div class="form-group">
@@ -54,6 +58,7 @@
 				<div class="col-sm-4">
 					<input class="form-control" type="text" id="usernameInputId"
 						name="usernameInput">
+					<div id="messaggioUsername" style="color:Red;display:none;">Allarme! Inserisci Username!</div>	
 				</div>
 			</div>
 			<div class="form-group">
@@ -61,15 +66,16 @@
 				<div class="col-sm-4">
 					<input class="form-control" type="password" id="passwordInputId"
 						name="passwordInput">
+					<div id="messaggioPassword" style="color:Red;display:none;">Allarme! Inserisci Password!</div>	
 				</div>
 			</div>
-
-			<div>
-				<c:forEach items="${listaRuoliAttributeName}" var="ruoloItem">
-					<label class="control-label col-sm-2" for="ruoloInputId">Ruolo:</label>
-					<input type="checkbox" name="ruoliId" value="${ruoloItem.id}"/>${ruoloItem.descrizione}<br>
-				</c:forEach>
-			</div>
+			<c:forEach items="${listaRuoliAttributeName}" var="ruoloItem">
+				<div class="custom-control custom-checkbox">
+					<input type="checkbox" class="custom-control-input" id="${ruoloItem.id}" name="ruoliId" value="${ruoloItem.id}"/>
+					<label class="custom-control-label" for="${ruoloItem.id}">${ruoloItem.descrizione}</label><br>
+				</div>
+			</c:forEach>
+			<div id="messaggioRuolo" style="color:Red;display:none;">Allarme! Inserisci un Ruolo!</div>	
 			<br>
 			<div class="form-group">
 				<div class="col-sm-offset-2 col-sm-10">
@@ -81,7 +87,42 @@
 
 	</div>
 	<!-- /.container -->
+<script type="text/javascript">
+function validateForm() {
+    var textNome = document.forms["myForm"]["nomeInput"].value;
+    var textCognome = document.forms["myForm"]["cognomeInput"].value;
+    var textUsername = document.forms["myForm"]["usernameInput"].value;
+    var textPassword = document.forms["myForm"]["passwordInput"].value;
+	var allCheckBoxes = document.querySelectorAll("[name='ruoliId']:checked");
+	
+	if(textNome == "" || textNome == null) {
+	    document.getElementById("messaggioNome").style.display = "";
+	    document.myForm.nomeInput.focus();
+	    return false;
+	} 
+	if(textCognome == "" || textCognome == null) {
+	    document.getElementById("messaggioCognome").style.display = "";
+	    document.myForm.cognomeInput.focus();
+	    return false;
+	}
+	if(textUsername == "" || textUsername == null) {
+	    document.getElementById("messaggioUsername").style.display = "";
+	    document.myForm.usernameInput.focus();
+	    return false;
+	}
+	if(textPassword == "" || textPassword == null) {
+	    document.getElementById("messaggioPassword").style.display = "";
+	    document.myForm.passwordInput.focus();
+	    return false;
+	}
+	if(allCheckBoxes.length == 0){
+		document.getElementById("messaggioRuolo").style.display="";
+		return false;
+	}
 
+    return true;
+}
+</script>
 
 
 </body>

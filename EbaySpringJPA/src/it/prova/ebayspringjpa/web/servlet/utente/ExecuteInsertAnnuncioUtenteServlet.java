@@ -53,15 +53,15 @@ public class ExecuteInsertAnnuncioUtenteServlet extends HttpServlet {
 		AnnuncioDTO annuncioDTO = new AnnuncioDTO();
 
 		String[] categorie = request.getParameterValues("categoriaId");
-		if(categorie == null) {
-			request.setAttribute("listaCategorieAttributeName", categoriaService.listAllCategorie());
-			String messaggio_errore = "Inserisci correttamente Categorie";
-			request.setAttribute("messaggio_errore", messaggio_errore);
+//		if(categorie == null) {
+//			request.setAttribute("listaCategorieAttributeName", categoriaService.listAllCategorie());
+//			String messaggio_errore = "Inserisci correttamente Categorie";
+//			request.setAttribute("messaggio_errore", messaggio_errore);
 			
-			RequestDispatcher rd = request.getRequestDispatcher("/utente/aggiungiAnnuncioUtente.jsp");
-			rd.forward(request, response);
-			return;
-		}
+//			RequestDispatcher rd = request.getRequestDispatcher("/utente/aggiungiAnnuncioUtente.jsp");
+//			rd.forward(request, response);
+//			return;
+//		}
 		Set<Categoria> listaCategorie = new HashSet<Categoria>();
 		for (int i = 0; i < categorie.length; i++) {
 			listaCategorie.add(categoriaService.caricaSingolaCategoria(Long.parseLong(categorie[i])));
@@ -78,15 +78,15 @@ public class ExecuteInsertAnnuncioUtenteServlet extends HttpServlet {
 			annuncioDTO.setPrezzo(-1);
 		}
 
-		if (!annuncioDTO.validate().isEmpty()) {
-
-			request.setAttribute("listaCategorieAttributeName", categoriaService.listAllCategorie());
-			request.setAttribute("messaggio_errore", annuncioDTO.validate());
-
-			RequestDispatcher rd = request.getRequestDispatcher("/utente/aggiungiAnnuncioUtente.jsp");
-			rd.forward(request, response);
-			return;
-		}
+//		if (!annuncioDTO.validate().isEmpty()) {
+//
+//			request.setAttribute("listaCategorieAttributeName", categoriaService.listAllCategorie());
+//			request.setAttribute("messaggio_errore", annuncioDTO.validate());
+//
+//			RequestDispatcher rd = request.getRequestDispatcher("/utente/aggiungiAnnuncioUtente.jsp");
+//			rd.forward(request, response);
+//			return;
+//		}
 
 		Annuncio annuncioDaInserire = AnnuncioDTO.buildAnnuncioIntance(annuncioDTO);
 		annuncioDaInserire.setUtente(utente);

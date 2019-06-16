@@ -35,6 +35,9 @@ public class AnnuncioDTO {
 		if (prezzo < 0) {
 			listaErrori.add("Inserire correttamente campo Prezzo");
 		}
+		if ( this.categorie.size() <= 0 ) {
+			listaErrori.add("Selezionare almeno una Categoria");
+		} 
 
 		return listaErrori;
 	}

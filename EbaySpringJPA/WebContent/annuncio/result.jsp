@@ -14,8 +14,10 @@
 	<%@ include file="../header.jsp" %>
   	
   	<div class="page-header">
-	  <h3>Pagina dei Risultati</h3>
+  	<br>
+		<h3>Pagina dei Risultati</h3>
 	</div>
+	<br>
   	
 	<table class="table table-hover">
 		<thead>
@@ -34,9 +36,9 @@
 				<td>
 					<a href="${pageContext.request.contextPath}/PrepareBuyAnnuncioServlet?idAnnuncio=${item.id}" class="btn btn-outline-danger">Compra</a>
 					<a href="${pageContext.request.contextPath}/VisualizzaDettaglioAnnuncioServlet?idAnnuncio=${item.id}" class="btn btn-outline-danger">Dettaglio</a>
-					<c:if test="${userInfo.username != null}">
-					<a href="${pageContext.request.contextPath}/PrepareDeleteAnnuncioServlet?idAnnuncio=${item.id}" class="btn btn-outline-danger">Elimina</a>
-					</c:if>
+<%-- 					<c:if test="${ userInfo.username != null}}"> --%>
+<%-- 					<a href="${pageContext.request.contextPath}/PrepareDeleteAnnuncioServlet?idAnnuncio=${item.id}" class="btn btn-outline-danger">Elimina</a> --%>
+<%-- 					</c:if> --%>
 <%-- 					<c:if test="${userInfo.username == null}"> --%>
 <%-- 					<a href="${pageContext.request.contextPath}/PrepareDeleteAnnuncioServlet?idAnnuncio=${item.id}" class="btn btn-outline-danger">Elimina</a> --%>
 <%-- 					</c:if> --%>

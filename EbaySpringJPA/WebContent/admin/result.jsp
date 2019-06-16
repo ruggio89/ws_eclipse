@@ -14,8 +14,10 @@
 	<%@ include file="../header.jsp" %>
   	
   	<div class="page-header">
+  	<br>
 	  <h3>Pagina dei Risultati</h3>
 	</div>
+	<br>
   	
 	<table class="table table-hover">
 		<thead>
