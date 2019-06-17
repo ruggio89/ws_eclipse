@@ -14,38 +14,38 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.context.support.SpringBeanAutowiringSupport;
 
 import it.prova.ebayspringjpa.model.Categoria;
-import it.prova.ebayspringjpa.model.dto.CategoriaDTO;
 import it.prova.ebayspringjpa.service.categoria.CategoriaService;
+import it.prova.ebayspringjpa.utility.Utility;
 
-@WebServlet("/admin/ExecuteSearchCategoriaServlet")
-public class ExecuteSearchCategoriaServlet extends HttpServlet {
+@WebServlet("/admin/ExecuteDeleteCategoriaServlet")
+public class ExecuteDeleteCategoriaServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
 	@Autowired
 	private CategoriaService categoriaService;
-	
+       
 	@Override
 	public void init(ServletConfig config) throws ServletException {
 		super.init(config);
 		SpringBeanAutowiringSupport.processInjectionBasedOnCurrentContext(this);
 	}
-       
-    public ExecuteSearchCategoriaServlet() {
+	
+    public ExecuteDeleteCategoriaServlet() {
         super();
     }
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-		String descrizioneInput = request.getParameter("descrizioneInput");
-		String codiceInput = request.getParameter("codiceInput");
-
-		CategoriaDTO categoriaDTO = new CategoriaDTO(descrizioneInput, codiceInput);
-		Categoria categoriaDaCercate = CategoriaDTO.buildCategoriaInstance(categoriaDTO);
-
-		request.setAttribute("listaCategorieAttributeName", categoriaService.findByExample(categoriaDaCercate));
-
+		Long idInput = Utility.parseFromStrinToLong(request.getParameter("idInput"));
+		
+		Categoria categoriaDaEliminare = categoriaService.caricaEager(idInput);
+		categoriaService.rimuovi(categoriaDaEliminare);
+		
+		request.setAttribute("listaCategorieAttributeName", categoriaService.listAllCategorie());
+		
 		RequestDispatcher rd = request.getRequestDispatcher("/admin/categoria/result.jsp");
 		rd.forward(request, response);
+		
 	}
 
 }

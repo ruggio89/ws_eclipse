@@ -16,9 +16,10 @@ import org.springframework.web.context.support.SpringBeanAutowiringSupport;
 import it.prova.ebayspringjpa.model.Categoria;
 import it.prova.ebayspringjpa.model.dto.CategoriaDTO;
 import it.prova.ebayspringjpa.service.categoria.CategoriaService;
+import it.prova.ebayspringjpa.utility.Utility;
 
-@WebServlet("/admin/ExecuteSearchCategoriaServlet")
-public class ExecuteSearchCategoriaServlet extends HttpServlet {
+@WebServlet("/admin/ExecuteUpdateCategoriaServlet")
+public class ExecuteUpdateCategoriaServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
 	@Autowired
@@ -29,21 +30,36 @@ public class ExecuteSearchCategoriaServlet extends HttpServlet {
 		super.init(config);
 		SpringBeanAutowiringSupport.processInjectionBasedOnCurrentContext(this);
 	}
-       
-    public ExecuteSearchCategoriaServlet() {
+	
+    public ExecuteUpdateCategoriaServlet() {
         super();
     }
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-		String descrizioneInput = request.getParameter("descrizioneInput");
-		String codiceInput = request.getParameter("codiceInput");
-
-		CategoriaDTO categoriaDTO = new CategoriaDTO(descrizioneInput, codiceInput);
-		Categoria categoriaDaCercate = CategoriaDTO.buildCategoriaInstance(categoriaDTO);
-
-		request.setAttribute("listaCategorieAttributeName", categoriaService.findByExample(categoriaDaCercate));
-
+		
+		Long idInput = Long.parseLong(request.getParameter("idInput"));
+		
+		Categoria categoriaInput = categoriaService.caricaEager(idInput);
+		
+		CategoriaDTO categoriaDTO = new CategoriaDTO();
+		categoriaDTO.setDescrizione(request.getParameter("descrizioneInput"));
+		categoriaDTO.setCodice(request.getParameter("codiceInput"));
+		categoriaDTO.setAnnunci(categoriaInput.getAnnunci());
+		
+		if(!categoriaDTO.validate().isEmpty()) {
+			request.setAttribute("messaggio_errore", categoriaDTO.validate());
+			request.setAttribute("categoriadamodificare_attribute", categoriaService.caricaEager(idInput));
+			
+			RequestDispatcher rd = request.getRequestDispatcher("/admin/categoria/aggiungi.jsp");
+			rd.forward(request, response);
+		}
+		
+		Categoria categoriaDaModificare = CategoriaDTO.buildCategoriaInstance(categoriaDTO);
+		categoriaDaModificare.setId(idInput);
+		categoriaService.aggiorna(categoriaDaModificare);
+		
+		request.setAttribute("listaCategorieAttributeName", categoriaService.listAllCategorie());
+		
 		RequestDispatcher rd = request.getRequestDispatcher("/admin/categoria/result.jsp");
 		rd.forward(request, response);
 	}

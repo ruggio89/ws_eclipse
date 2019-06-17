@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import it.prova.ebayspringjpa.dao.categoria.CategoriaDAO;
 import it.prova.ebayspringjpa.model.Categoria;
@@ -14,34 +15,39 @@ public class CategoriaServiceImpl implements CategoriaService {
 	@Autowired
 	private CategoriaDAO categoriaDAO;
 
-	@Override
+	@Transactional(readOnly = true)
 	public List<Categoria> listAllCategorie() {
 		return categoriaDAO.list();
 	}
 
-	@Override
+	@Transactional(readOnly = true)
 	public Categoria caricaSingolaCategoria(Long id) {
 		return categoriaDAO.get(id);
 	}
 
-	@Override
+	@Transactional
 	public void aggiorna(Categoria categoriaInstance) {
 		categoriaDAO.update(categoriaInstance);
 	}
 
-	@Override
+	@Transactional
 	public void inserisciNuova(Categoria categoriaInstance) {
 		categoriaDAO.insert(categoriaInstance);
 	}
 
-	@Override
+	@Transactional
 	public void rimuovi(Categoria categoriaInstance) {
 		categoriaDAO.delete(categoriaInstance);
 	}
 
-	@Override
+	@Transactional(readOnly = true)
 	public List<Categoria> findByExample(Categoria example) {
 		return categoriaDAO.findByExample(example);
+	}
+
+	@Transactional(readOnly = true)
+	public Categoria caricaEager(Long id) {
+		return categoriaDAO.getEager(id);
 	}
 
 }

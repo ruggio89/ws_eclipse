@@ -22,12 +22,14 @@
 		<div class="page-header">
 			<h3>Inserisci Annuncio</h3>
 		</div>
-<%-- 		<div class="alert alert-danger alert-dismissible fade show ${messaggio_errore != null?'':'d-none'} " role="alert"> --%>
-<%-- 			${messaggio_errore } --%>
-<!-- 			 <button type="button" class="close" data-dismiss="alert" aria-label="Close"> -->
-<!-- 			    <span aria-hidden="true">&times;</span> -->
-<!-- 			  </button> -->
-<!-- 		</div> -->
+		
+		<div class="alert alert-danger alert-dismissible fade show ${messaggio_errore != null?'':'d-none'} " role="alert">
+			${messaggio_errore }
+			 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+			    <span aria-hidden="true">&times;</span>
+			  </button>
+		</div>
+		
 		<form class="form-horizontal" name="myForm" action="ExecuteInsertAnnuncioUtenteServlet"
 			method="post" onsubmit="return validateForm()">
 			<div class="form-group">

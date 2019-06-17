@@ -29,12 +29,12 @@
 			<h3>Inserisci Utente</h3>
 		</div>
 		<br>
-		<div class="alert alert-danger alert-dismissible fade show ${messaggio_errore != null?'':'d-none'} " role="alert">
-			${messaggio_errore }
-			 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-			    <span aria-hidden="true">&times;</span>
-			  </button>
-		</div>
+<%-- 		<div class="alert alert-danger alert-dismissible fade show ${messaggio_errore != null?'':'d-none'} " role="alert"> --%>
+<%-- 			${messaggio_errore } --%>
+<!-- 			 <button type="button" class="close" data-dismiss="alert" aria-label="Close"> -->
+<!-- 			    <span aria-hidden="true">&times;</span> -->
+<!-- 			  </button> -->
+<!-- 		</div> -->
 		<form class="form-horizontal" name="myForm" action="${pageContext.request.contextPath}/admin/ExecuteInsertUtenteServlet"
 			method="post" onsubmit="return validateForm()">
 			<div class="form-group">

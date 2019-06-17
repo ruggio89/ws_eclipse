@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 import org.apache.commons.lang.StringUtils;
 import org.hibernate.Criteria;
@@ -73,5 +74,15 @@ public class CategoriaDAOImpl implements CategoriaDAO{
 		Criteria criteria = session.createCriteria(Categoria.class).add(categoriaExample);
 		return criteria.list();
 	}
+
+	@Override
+	public Categoria getEager(Long id) {
+		Query q = entityManager.createQuery("Select c from Categoria c left join fetch c.annunci where c.id=:id");
+		q.setParameter("id", id);
+		
+		return (Categoria) q.getSingleResult();
+	}
+	
+	
 
 }

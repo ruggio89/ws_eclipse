@@ -17,4 +17,6 @@ public interface CategoriaService {
 	public void rimuovi(Categoria categoriaInstance);
 
 	public List<Categoria> findByExample(Categoria example);
+	
+	public Categoria caricaEager(Long id);
 }

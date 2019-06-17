@@ -5,4 +5,5 @@ import it.prova.ebayspringjpa.model.Categoria;
 
 public interface CategoriaDAO extends IBaseDAO<Categoria> {
 
+	public Categoria getEager(Long id);
 }
