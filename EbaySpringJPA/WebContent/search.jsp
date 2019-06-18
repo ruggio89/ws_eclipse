@@ -22,12 +22,12 @@
 	  <h3>Ebay Annunci Searcher</h3><br>
 	</div>
 
-<%-- 		<div class="alert alert-danger alert-dismissible fade show ${messaggio_errore != null?'':'d-none'} " role="alert"> --%>
-<%-- 				${messaggio_errore } --%>
-<!-- 			 <button type="button" class="close" data-dismiss="alert" aria-label="Close"> -->
-<!-- 			    <span aria-hidden="true">&times;</span> -->
-<!-- 			  </button> -->
-<!-- 		</div> -->
+		<div class="alert alert-danger alert-dismissible fade show ${messaggio_errore != null?'':'d-none'} " role="alert">
+				${messaggio_errore }
+			 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+			    <span aria-hidden="true">&times;</span>
+			  </button>
+		</div>
       	<form class="form-horizontal" name="myForm" action="ExecuteSearchAnnuncioServlet" method="post" onsubmit="return validateCategorie()">
       		<div class="form-group">
       			<label class="control-label col-sm-2" for="testoAnnuncioInputId">Ricerca Annuncio:</label>

@@ -52,7 +52,6 @@ public class ExecuteInsertUtenteServlet extends HttpServlet {
 		String usernameInput = request.getParameter("usernameInput");
 		String passwordInput = request.getParameter("passwordInput");
 		Date dataReg = new Date();
-		System.out.println(dataReg);
 		Double creditoResiduo = Utility.parseFromStrinToDouble(request.getParameter("creditoInput"));
 		
 		UtenteDTO utenteDTO = new UtenteDTO(nomeInput, cognomeInput, usernameInput, passwordInput, creditoResiduo, dataReg);

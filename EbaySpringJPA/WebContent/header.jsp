@@ -5,7 +5,9 @@
 
 <!-- Static navbar -->
 <nav class="navbar navbar-expand-lg navbar-light " style="background-color: #EAF4F4;">
-	<a class="navbar-brand" href="${pageContext.request.contextPath}/ReturnHomeServlet">Ebay</a>
+	<a class="navbar-brand" href="${pageContext.request.contextPath}/ReturnHomeServlet">
+		<img src="${pageContext.request.contextPath}/img/scimmia.png" width="50" height="50" alt="">
+	</a>
 	<button class="navbar-toggler" type="button" data-toggle="collapse"
 		data-target="#navbarSupportedContent"
 		aria-controls="navbarSupportedContent" aria-expanded="false"
@@ -21,19 +23,17 @@
 			<li class="nav-item dropdown"><a
 				class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
 				role="button" data-toggle="dropdown" aria-haspopup="true"
-				aria-expanded="false"> Dropdown </a>
+				aria-expanded="false"> Partners </a>
 				<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-					<a class="dropdown-item" href="#">Action</a> <a
-						class="dropdown-item" href="#">Another action</a>
-					<div class="dropdown-divider"></div>
-					<a class="dropdown-item" href="#">Something else here</a>
+					<a class="dropdown-item" href="https://www.ebay.it/">TrueEbay</a> <a
+						class="dropdown-item" href="https://www.amazon.it/">Amazon</a>
 				</div></li>
 		</ul>
 		<c:if test="${userInfo.username == null}">
 		 <ul class="nav navbar-nav navbar-right">
             <li><p class="navbar-text">Utente: <em>${userInfo.username}</em> (${userInfo.nome } ${userInfo.cognome })
             
-            <a href="${pageContext.request.contextPath}/login.jsp">Accedi</a></p>
+            <a href="${pageContext.request.contextPath}/login.jsp" class="btn btn-outline-light">Accedi</a></p>
             </li>
           </ul>
          </c:if>
@@ -41,8 +41,9 @@
          <c:if test="${userInfo.username != null}">
 		 <ul class="nav navbar-nav navbar-right">
             <li><p class="navbar-text">Utente: ${userInfo.username}(${userInfo.nome} ${userInfo.cognome})
-            <a href="${pageContext.request.contextPath}/LogoutServlet">Disconnetti</a>
-            <a href="${pageContext.request.contextPath}/utente/areaRiservata.jsp">Area Riservata</a></p> 
+            <a href="${pageContext.request.contextPath}/LogoutServlet" class="btn btn-outline-light">Disconnetti</a>
+            <a href="${pageContext.request.contextPath}/utente/areaRiservata.jsp" class="btn btn-outline-light">Area Riservata</a></p> 
+<%--             <button type = "button" class = "btn btn-default navbar-btn" onclick="${pageContext.request.contextPath}/utente/areaRiservata.jsp">bottone</button> --%>
             
             </li>
           </ul>
