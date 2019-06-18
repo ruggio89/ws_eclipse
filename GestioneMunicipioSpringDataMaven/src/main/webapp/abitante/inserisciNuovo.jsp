@@ -136,7 +136,7 @@ function validateForm() {
 	    document.myForm.cognomeInput.focus();
 	    return false;
 	}
-	if(textEta <= 0 || textEta == null) {
+	if(textEta <= 0 || textEta == null || isNaN(textEta)) {
 	    document.getElementById("messaggioEta").style.display = "";
 	    document.myForm.etaInput.focus();
 	    return false;

@@ -68,23 +68,24 @@
 	
 <script type="text/javascript">
 function validateForm() {
-    var textTestoAnnuncio = document.forms["myForm"]["testoAnnuncioInput"].value;
-    var textPrezzo = document.forms["myForm"]["prezzoInput"].value;
-	var allCheckBoxes = document.querySelectorAll("[name='categoriaId']:checked");
+    var textDescrizione = document.getElementById("descrizioneInputId").value;
+    var textCodice = document.getElementById("codiceInputId").value;
+    var textUbicazione = document.getElementById("ubicazioneInputId").value;
 	
-	if(textTestoAnnuncio == "" || textTestoAnnuncio == null) {
-	    document.getElementById("messaggioAnnuncio").style.display = "";
-	    document.myForm.testoAnnuncioInput.focus();
+	if(textDescrizione == "" || textDescrizione == null) {
+	    document.getElementById("messaggioDescrizione").style.display = "";
+	    document.myForm.descrizioneInput.focus();
 	    return false;
 	} 
-	if(textPrezzo == "" || textPrezzo == null) {
-	    document.getElementById("messaggioPrezzo").style.display = "";
-	    document.myForm.prezzoInput.focus();
+	if(textCodice == "" || textCodice == null) {
+	    document.getElementById("messaggioCodice").style.display = "";
+	    document.myForm.codiceInput.focus();
 	    return false;
 	}
-	if(allCheckBoxes.length == 0){
-		document.getElementById("messaggioCategoria").style.display="";
-		return false;
+	if(textUbicazione == "" || textUbicazione == null) {
+	    document.getElementById("messaggioUbicazione").style.display = "";
+	    document.myForm.ubicazioneInput.focus();
+	    return false;
 	}
 
     return true;

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts-config PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 
+
+1.3//EN" "http://struts.apache.org/dtds/struts-config_1_3.dtd">
+
+
+<struts-config>
+	<form-beans>
+		<form-bean name="MunicipioForm"
+			type="it.municipioabitantejpa.struts.form.MunicipioForm" />
+		<form-bean name="AbitanteForm"
+			type="it.municipioabitantejpa.struts.form.AbitanteForm" />
+	</form-beans>
+
+	<global-exceptions>
+	</global-exceptions>
+	<global-forwards>
+		<forward name="home" path="/home.do" />
+	</global-forwards>
+
+	<!-- CICLI LOGICI DI NAVIGAZIONE  -->
+	<action-mappings>
+		<!-- GIRO DELLA HOME -->
+		<action path="/home" 
+			type="it.municipioabitantejpa.struts.action.HomeAction">
+			<forward name="success" path="/jsp/municipio/list.jsp" />
+		</action>
+		
+		<!-- GIRO DELLA DISPATCH -->
+		<action path="/municipio" name="MunicipioForm" scope="request" parameter="codop"
+			type="it.municipioabitantejpa.struts.action.MunicipioAction">
+			<forward name="show" path="/jsp/municipio/show.jsp" />
+			<forward name="create" path="/jsp/municipio/create.jsp" />
+		</action>
+		
+		<action path="/abitante" name="AbitanteForm" scope="request" parameter="codop"
+			type="it.municipioabitantejpa.struts.action.AbitanteAction">
+			<forward name="showAll" path="/jsp/abitante/list.jsp" />
+			<forward name="create" path="/jsp/abitante/create.jsp" />
+			<forward name="show" path="/jsp/abitante/show.jsp" />
+		</action>
+		
+	</action-mappings>
+
+	<message-resources parameter="resource.MessageResource"></message-resources>
+
+</struts-config>

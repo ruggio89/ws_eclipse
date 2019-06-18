@@ -18,7 +18,7 @@
 	</div>
 
       	<form class="form-horizontal" name="myForm" action="${pageContext.request.contextPath}/ExecuteUpdateMunicipioServlet" method="post" onsubmit="return validateForm()">
-      		<div class="form-group">
+      		<div class="form-group" onsubmit="return validateForm()">
       			<label class="control-label col-sm-2" for="descrizioneInputId">Descrizione:</label>
 	    		<div class="col-sm-4">
 					<input class="form-control" type="text" id="descrizioneInputId" name="descrizioneInput" value="${municipiodamodificare_attribute.descrizione}">
@@ -56,7 +56,6 @@ function validateForm() {
     var textDescrizione = document.getElementById("descrizioneInputId").value;
     var textCodice = document.getElementById("codiceInputId").value;
     var textUbicazione = document.getElementById("ubicazioneInputId").value;
-//     var textCredito = document.forms["myForm"]["creditoInput"].value;
 	
 	if(textDescrizione == "" || textDescrizione == null) {
 	    document.getElementById("messaggioDescrizione").style.display = "";
