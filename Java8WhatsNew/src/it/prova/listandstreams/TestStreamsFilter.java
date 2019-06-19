@@ -12,10 +12,14 @@ public class TestStreamsFilter {
 		System.out.println("voglio una sott-lista degli autori under 30");
 		List<Autore> listaAutoriUnderTrenta = listaAutori.stream().filter(autoreItem -> autoreItem.getEta() < 30)
 				.collect(Collectors.toList());
-
 		// la stampo
 		listaAutoriUnderTrenta
 				.forEach(autoreItem -> System.out.println(autoreItem.getNome() + " di anni " + autoreItem.getEta()));
+		
+		// sott-lista autori over 30 e under 40
+		List<Autore> listaAutoriOverTrenta = listaAutori.stream().filter(autoreItem -> autoreItem.getEta() > 30 && autoreItem.getEta() < 40).collect(Collectors.toList());
+		//stampo
+		listaAutoriOverTrenta.forEach(autoreItem -> System.out.println(autoreItem.getNome() + " " + autoreItem.getCognome() + " di anni " + autoreItem.getEta()));
 
 		System.out.println("voglio trasformare la lista di autori under 30 in String x es. mario rossi con cf ADKF3120");
 		// voglio trasformare la lista di autori under 30 in String x es. mario rossi
